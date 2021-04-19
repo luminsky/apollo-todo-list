@@ -1,1 +1,8 @@
-node_modules
+# Compiled
+/dist
+
+# Modules
+/node_modules
+
+# IDEs
+.idea
