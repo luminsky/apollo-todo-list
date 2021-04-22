@@ -1,4 +1,4 @@
-import {AuthenticationError, ForbiddenError, ValidationError} from 'apollo-server';
+import {AuthenticationError, ForbiddenError, ValidationError} from 'apollo-server-lambda';
 import argon from 'argon2';
 import jwt from 'jsonwebtoken';
 
