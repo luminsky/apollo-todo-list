@@ -6,11 +6,11 @@ phases:
       - npm install
   pre_build:
     commands:
+      - npm run build
       # Remove all dependencies not needed for the Lambda deployment package (the packages from devDependencies in package.json)
       - npm prune --production
   build:
     commands:
-      - npm run build
       # Use AWS SAM to package the application by using AWS CloudFormation
       - aws cloudformation package --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
 artifacts:

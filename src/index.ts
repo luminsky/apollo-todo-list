@@ -1,8 +1,5 @@
-import {ApolloServer, gql} from 'apollo-server';
-import {ApolloServer as ApolloServerLambda} from 'apollo-server-lambda';
+import {ApolloServer, gql} from 'apollo-server-lambda';
 import {addTodo, createTodoList, getAuthToken, todo, todos, toggleTodoStatus, removeTodo} from './resolvers';
-
-const PORT = process.env.PORT || 4000;
 
 const typeDefs = gql`
 	type Todo {
@@ -47,15 +44,4 @@ const server = new ApolloServer({
 	context: ({req}) => ({token: req.headers.authorization}),
 });
 
-// Lambda
-const lambdaServer = new ApolloServerLambda({
-	typeDefs,
-	resolvers,
-	context: ({req}) => ({token: req.headers.authorization}),
-});
-export const graphqlHandler = lambdaServer.createHandler();
-//
-
-server.listen(PORT).then(({url}) => {
-	console.log(`Server is running at ${url}`);
-});
+export const graphqlHandler = server.createHandler();

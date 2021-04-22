@@ -14,7 +14,6 @@
     "author": "Valentine Shveda",
     "license": "ISC",
     "dependencies": {
-        "apollo-server": "^2.23.0",
         "apollo-server-lambda": "^2.23.0",
         "argon2": "^0.27.2",
         "aws-sdk": "^2.660.0",
