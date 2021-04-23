@@ -18,7 +18,7 @@ phases:
         --template template.yml
         --s3-bucket $S3_BUCKET
         --output-template-file template-export.yml
-        --parameter-overrides "NodeEnv=$NODE_ENV,DatabaseHost=$DATABASE_HOST,DatabaseUsername=$DATABASE_USERNAME,DatabasePassword=$DATABASE_PASSWORD,JwtSecret=$JWT_SECRET"
+        --env-vars env.json
 artifacts:
   files:
     - template-export.yml
