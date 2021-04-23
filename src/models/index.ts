@@ -9,8 +9,10 @@ const config = databaseConfig[ENV] as any;
 
 const sequelize = new Sequelize(config);
 
-export const TodoList = MTodoList(sequelize);
-export const Todo = MTodo(sequelize);
+const TodoList = MTodoList(sequelize);
+const Todo = MTodo(sequelize);
 
 TodoList.hasMany(Todo, {foreignKey: 'todo_list_id', onDelete: 'cascade'});
 Todo.belongsTo(TodoList, {foreignKey: 'todo_list_id'});
+
+export {TodoList, Todo};
