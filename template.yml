@@ -29,32 +29,23 @@ Parameters:
 Resources:
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
-  graphqlGet:
+  graphql:
     Type: AWS::Serverless::Function
+    FunctionName: apollo-graphql
     Properties:
       CodeUri: ./
       Handler: dist/index.graphqlHandler
-      Runtime: nodejs10.x
+      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 60
-      Description: A route for get GraphQL method.
+      Description: An endpoint for GraphQL queries.
       Events:
-        Api:
+        GetEvent:
           Type: Api
           Properties:
             Path: graphql
             Method: GET
-  graphqlPost:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: ./
-      Handler: dist/index.graphqlHandler
-      Runtime: nodejs10.x
-      MemorySize: 128
-      Timeout: 60
-      Description: A route for post GraphQL method.
-      Events:
-        Api:
+        PostEvent:
           Type: Api
           Properties:
             Path: graphql
