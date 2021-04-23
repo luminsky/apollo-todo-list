@@ -41,7 +41,7 @@ const resolvers = {
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
-	context: ({req}) => ({token: req.headers.authorization}),
+	context: ({req}) => ({token: req?.headers.authorization}),
 });
 
 export const graphqlHandler = server.createHandler();

@@ -6,6 +6,7 @@ phases:
       - npm install
   pre_build:
     commands:
+      # Build the typescript code
       - npm run build
       # Remove all dependencies not needed for the Lambda deployment package (the packages from devDependencies in package.json)
       - npm prune --production
