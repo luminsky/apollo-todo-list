@@ -10,6 +10,20 @@ Description: Lambda application apollo-todo-list
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
 Transform: AWS::Serverless-2016-10-31
 
+Parameters:
+  AppId:
+    Type: String
+  NodeEnv:
+    Type: String
+  DatabaseHost:
+    Type: String
+  DatabaseUsername:
+    Type: String
+  DatabasePassword:
+    Type: String
+  JwtSecret:
+    Type: String
+
 # Shared configuration for all resources, more in
 # https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
@@ -19,10 +33,14 @@ Globals:
     # it has to be manually updated when you add resources to your application.
     # More information in https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html
     PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/${AppId}-${AWS::Region}-PermissionsBoundary'
-
-Parameters:
-  AppId:
-    Type: String
+    Runtime: nodejs14.x
+    Environment:
+      Variables:
+        NODE_ENV: !Ref NodeEnv
+        DATABASE_HOST: !Ref DatabaseHost
+        DATABASE_USERNAME: !Ref DatabaseUsername
+        DATABASE_PASSWORD: !Ref DatabasePassword
+        JWT_SECRET: !Ref JwtSecret
 
 # Resources declares the AWS resources that you want to include in the stack
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
@@ -35,7 +53,6 @@ Resources:
     Properties:
       CodeUri: ./
       Handler: dist/index.graphqlHandler
-      Runtime: nodejs14.x
       MemorySize: 128
       Timeout: 60
       Description: An endpoint for GraphQL queries.

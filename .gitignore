@@ -6,3 +6,6 @@
 
 # IDEs
 .idea
+
+# environment
+.env
